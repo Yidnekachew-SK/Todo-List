@@ -1,0 +1,50 @@
+*{
+	box-sizing: border-box;
+	border: 1px solid red;
+}
+
+body{
+	display: grid;
+	grid-template-rows: 1fr 5fr;
+}
+
+h1{
+	text-align: center;
+}
+
+.container{
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+}
+
+.project-bar{
+	padding: 10px;
+}
+
+.add-project-button{
+	padding: 5px 15px;
+}
+
+.title-container{
+	padding: 2px 5px;
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.project-title{
+	margin: 0;
+}
+
+.todo-name{
+	margin: 4px 10px;
+}
+
+.content-displayer{
+	padding: 15px;
+}
+
+footer p{
+	text-align: center;
+}
