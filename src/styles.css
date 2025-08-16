@@ -25,6 +25,10 @@ h1{
 	padding: 5px 15px;
 }
 
+.project{
+	margin: 5px 0;
+}
+
 .title-container{
 	padding: 2px 5px;
 	height: 100%;
@@ -38,13 +42,72 @@ h1{
 }
 
 .todo-name{
-	margin: 4px 10px;
+	
 }
 
 .content-displayer{
 	padding: 15px;
 }
 
+.todo-container{
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.todo-display p{
+	margin: 0;
+}
+
+.todo-display{
+	padding: 5px;
+	display: grid;
+	grid-template-columns: 10fr 1fr 1fr;
+	align-items: center;
+	gap: 10px;
+}
+
+.detail-displayer{
+	padding: 0 10px;
+}
+
 footer p{
 	text-align: center;
 }
+
+.project-form-container{
+	width: 250px;
+	padding: 10px;
+	border: 2px solid gray;
+	position: absolute;
+	top: 20%;
+	left: 4%;
+	background-color: gray;
+	box-shadow: 3px 4px 5px black;
+}
+
+.project-form-container p{
+	text-align: center;
+}
+
+.project-form-container div{
+	margin-bottom: 10px;
+}
+
+input{
+	width: 100%;
+	border-radius: 3px;
+}
+
+.project-form-button{
+	padding: 5px 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.project-form-button button{
+	padding: 3px 15px;
+	border-radius: 5px;
+}
+
+
