@@ -6,6 +6,7 @@
 body{
 	display: grid;
 	grid-template-rows: 1fr 5fr;
+	min-height: 100vh;
 }
 
 h1{
@@ -32,17 +33,17 @@ h1{
 .title-container{
 	padding: 2px 5px;
 	height: 100%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	display: grid;
+	grid-template-columns: 10fr 1fr;
 }
 
 .project-title{
 	margin: 0;
 }
 
-.todo-name{
-	
+.delete-project-icon{
+	height: 25px;
+	width: 35px;
 }
 
 .content-displayer{
@@ -61,9 +62,21 @@ h1{
 .todo-display{
 	padding: 5px;
 	display: grid;
-	grid-template-columns: 10fr 1fr 1fr;
+	grid-template-columns: 10fr 1fr;
 	align-items: center;
-	gap: 10px;
+}
+
+.todo-icon-container{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 20px;
+}
+
+.expand-todo,
+.delete-todo{
+	height: 20px;
+	width: 30px;
 }
 
 .detail-displayer{
@@ -78,6 +91,7 @@ footer p{
 	width: 250px;
 	padding: 10px;
 	border: 2px solid gray;
+	border-radius: 10px;
 	position: absolute;
 	top: 20%;
 	left: 4%;

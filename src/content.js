@@ -17,7 +17,6 @@ function createButton(){
 
 function createIcon(icon){
 	const img = document.createElement("img");
-	img.className = "icon";
 	img.src = `${icon}`;
 
 	return img;
@@ -39,10 +38,10 @@ function displayProject(project){
 	title.textContent = `${project.name}`;
 	titleContainer.append(title);
 
-	const addButton = createButton();
-	addButton.className = "add-todo-button";
-	addButton.textContent = "+";
-	titleContainer.append(addButton);
+	const deleteIcon = createIcon(remove);
+	deleteIcon.id = `project-${project.name}`;
+	deleteIcon.classList.add("delete-project-icon");
+	titleContainer.append(deleteIcon);
 }
 
 function showTodoList(project){
@@ -62,15 +61,18 @@ function showTodoList(project){
 		nameOfTodo.textContent = `${project.todoList[i].name}`;
 		todoDisplayer.append(nameOfTodo);
 
-		const expandButton = createButton();
-		expandButton.className = "expand-todo-button";
-		expandButton.textContent = ">";
-		todoDisplayer.append(expandButton);
+		const todoIconContainer = createDiv();
+		todoIconContainer.className = "todo-icon-container";
+		todoIconContainer.id = `todo-${project.todoList[i].name}`;
+		todoDisplayer.append(todoIconContainer);
 
-		const deleteButton = createButton();
-		deleteButton.className = "delete-todo-button";
-		deleteButton.textContent = "x";
-		todoDisplayer.append(deleteButton);
+		const expandIcon = createIcon(expand);
+		expandIcon.className = "expand-todo";
+		todoIconContainer.append(expandIcon);
+
+		const deleteIcon = createIcon(remove);
+		deleteIcon.className = "delete-todo";
+		todoIconContainer.append(deleteIcon);
 	}
 }
 
@@ -102,7 +104,7 @@ function createProjectForm(){
 		</div>
 		<div class = "project-form-button">
 			<button type="submit" class="create-project">Submit</button>
-			<button class="cancel-project">Cancel</button>
+			<button type="button" class="cancel-form-button">Cancel</button>
 		</div>
 	</form>
 	`;
