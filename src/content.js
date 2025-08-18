@@ -25,8 +25,8 @@ function createIcon(icon){
 function displayProject(project){
 	const projectContainer = document.querySelector(".project-bar");
 	const div = createDiv();
-	div.className = "project";
-	div.classList.add(`project-${project.name}`);
+	div.className = "createdProject";
+	div.classList.add(`project-${project.name.replace(" ","-")}`);
 	projectContainer.append(div);
 
 	const titleContainer = createDiv();
@@ -37,20 +37,37 @@ function displayProject(project){
 	title.className = "project-title";
 	title.textContent = `${project.name}`;
 	titleContainer.append(title);
+	title.addEventListener("click", () => {
+		showTodoList(project);
+	})
+
+	const projectIconContainer = createDiv();
+	projectIconContainer.className = "project-icon-container";
+	projectIconContainer.id = `project-${project.name.replace(" ", "-")}`;
+	titleContainer.append(projectIconContainer);
+
+	const addIcon = createIcon(add);
+	addIcon.classList.add("add-todo-icon");
+	projectIconContainer.append(addIcon);
 
 	const deleteIcon = createIcon(remove);
-	deleteIcon.id = `project-${project.name}`;
 	deleteIcon.classList.add("delete-project-icon");
-	titleContainer.append(deleteIcon);
+	projectIconContainer.append(deleteIcon);
 }
 
 function showTodoList(project){
 	const listDisplayer = document.querySelector(".content-displayer");
+	listDisplayer.innerHTML = "";
+	const todoListContainer = createDiv();
+	todoListContainer.className = "todo-list-container";
+	todoListContainer.id = `project-${project.name.replace(" ", "-")}-container`;
+	listDisplayer.append(todoListContainer);
+
 	for(let i = 0; i < project.todoList.length; i++){
 		const todoContainer = createDiv();
-		todoContainer.className = `todo-${project.todoList[i].name}`;
+		todoContainer.id = `${project.todoList[i].name.replace(" ", "-")}`;
 		todoContainer.classList.add("todo-container");
-		listDisplayer.append(todoContainer);
+		todoListContainer.append(todoContainer);
 
 		const todoDisplayer = createDiv();
 		todoDisplayer.className = "todo-display";
@@ -63,21 +80,28 @@ function showTodoList(project){
 
 		const todoIconContainer = createDiv();
 		todoIconContainer.className = "todo-icon-container";
-		todoIconContainer.id = `todo-${project.todoList[i].name}`;
+		todoIconContainer.id = `${project.todoList[i].name.replace(" ", "-")}`;
 		todoDisplayer.append(todoIconContainer);
 
 		const expandIcon = createIcon(expand);
 		expandIcon.className = "expand-todo";
 		todoIconContainer.append(expandIcon);
+		expandIcon.addEventListener("click", () => {
+			displayTodoDetails(project, project.todoList[i])
+		}, { once: true });
 
 		const deleteIcon = createIcon(remove);
 		deleteIcon.className = "delete-todo";
 		todoIconContainer.append(deleteIcon);
+		deleteIcon.addEventListener("click", () => {
+			removeTodo(project, project.todoList[i]);
+			project.todoList.splice(i,1);
+		})
 	}
 }
 
-function displayTodoDetails(todo){
-	const displayer = document.querySelector(`.todo-${todo.name}`);
+function displayTodoDetails(project, todo){
+	const displayer = document.querySelector(`#${todo.name.replace(" ", "-")}`);
 
 	const detailDisplayer = createDiv();
 	detailDisplayer.className = "detail-displayer";
@@ -90,6 +114,11 @@ function displayTodoDetails(todo){
 	const date = createParagraph();
 	date.textContent = `Due Date: ${todo.date}`;
 	detailDisplayer.append(date);
+}
+
+function removeTodo(project, todo){
+	const todoToRemove = document.querySelector(`#${todo.name.replace(" ", "-")}`);
+	todoToRemove.remove();
 }
 
 function createProjectForm(){
@@ -111,4 +140,31 @@ function createProjectForm(){
 	document.body.append(projectFormContainer);
 }
 
-export {displayProject, showTodoList, displayTodoDetails, createProjectForm}
+function createTodoForm(){
+	const todoFormContainer = createDiv();
+	todoFormContainer.className = "todo-form-container";
+	todoFormContainer.innerHTML = `
+		<form id="todo-form">
+			<p>Add new Todo</p>
+			<div>
+				<label for="todo-name">Todo Name: </label>
+				<input type="text" id="todo-name" name="Todo-Name" required>
+			</div>
+			<div>
+				<label for="description">Description: </label>
+				<input type="text" id="description" name="Description" required>
+			</div>
+			<div>
+				<label for="date">Due Date: </label>
+				<input type="date" id="date" name="Date" required>
+			</div>
+			<div class="todo-form-button">
+				<button type="submit" class="create-todo">Submit</button>
+				<button type="button" class="cancel-form">Cancel</button>
+			</div>
+		</form>
+	`;
+	document.body.append(todoFormContainer);
+}
+
+export {displayProject, createProjectForm, createTodoForm}

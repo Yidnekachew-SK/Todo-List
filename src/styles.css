@@ -15,7 +15,7 @@ h1{
 
 .container{
 	display: grid;
-	grid-template-columns: 1fr 3fr;
+	grid-template-columns: 1.5fr 4fr;
 }
 
 .project-bar{
@@ -26,7 +26,7 @@ h1{
 	padding: 5px 15px;
 }
 
-.project{
+.createdProject{
 	margin: 5px 0;
 }
 
@@ -41,7 +41,15 @@ h1{
 	margin: 0;
 }
 
-.delete-project-icon{
+.project-icon-container{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 5px;
+}
+
+.delete-project-icon,
+.add-todo-icon{
 	height: 25px;
 	width: 35px;
 }
@@ -99,11 +107,23 @@ footer p{
 	box-shadow: 3px 4px 5px black;
 }
 
-.project-form-container p{
+.todo-form-container{
+	padding: 10px;
+	background-color: gray;
+	border: 2px solid black;
+	border-radius: 5px;
+	position: absolute;
+	top: 25%;
+	left: 20%;
+}
+
+.project-form-container p,
+.todo-form-container p{
 	text-align: center;
 }
 
-.project-form-container div{
+#project-form div,
+#todo-form div{
 	margin-bottom: 10px;
 }
 
@@ -112,16 +132,16 @@ input{
 	border-radius: 3px;
 }
 
-.project-form-button{
+.project-form-button,
+.todo-form-button{
 	padding: 5px 10px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.project-form-button button{
+.project-form-button button,
+.todo-form-button button{
 	padding: 3px 15px;
 	border-radius: 5px;
 }
-
-
