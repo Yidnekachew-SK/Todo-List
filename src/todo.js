@@ -1,11 +1,15 @@
+const myprojects = [];
+
 const createTodo = (name, description, date) => {
+	const todoId = "todo-" + crypto.randomUUID();
 	const isComplete = false;
-	return {name, description, date, isComplete};
+	return {name, description, date, todoId, isComplete};
 }
 
 const createProject = (name) => {
+	const id = "project-" + crypto.randomUUID();
 	const todoList = [];
-	return {name, todoList};
+	return {name, id, todoList};
 }
 
 const Todo = (function(){
@@ -17,9 +21,13 @@ const Todo = (function(){
 		name.isComplete = true;
 	}
 
-	return {addToProject, changeCompletedStatus};
+	const storeProject = (project) => {
+		myprojects.push(project);
+	}
+
+	return {addToProject, changeCompletedStatus, storeProject};
 })();
 
 
 
-export {createTodo, createProject, Todo}
+export {createTodo, createProject, Todo, myprojects}

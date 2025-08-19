@@ -1,7 +1,7 @@
 import add from "./icons/add.svg";
 import remove from "./icons/delete.svg";
 import expand from "./icons/expand.svg";
-
+import {myprojects} from "./todo.js"
 
 function createDiv(){
 	return document.createElement("div");
@@ -26,7 +26,7 @@ function displayProject(project){
 	const projectContainer = document.querySelector(".project-bar");
 	const div = createDiv();
 	div.className = "createdProject";
-	div.classList.add(`project-${project.name.replace(" ","-")}`);
+	div.classList.add(`${project.id}`);
 	projectContainer.append(div);
 
 	const titleContainer = createDiv();
@@ -43,7 +43,7 @@ function displayProject(project){
 
 	const projectIconContainer = createDiv();
 	projectIconContainer.className = "project-icon-container";
-	projectIconContainer.id = `project-${project.name.replace(" ", "-")}`;
+	projectIconContainer.id = `${project.id}`;
 	titleContainer.append(projectIconContainer);
 
 	const addIcon = createIcon(add);
@@ -60,12 +60,12 @@ function showTodoList(project){
 	listDisplayer.innerHTML = "";
 	const todoListContainer = createDiv();
 	todoListContainer.className = "todo-list-container";
-	todoListContainer.id = `project-${project.name.replace(" ", "-")}-container`;
+	todoListContainer.id = `${project.id}-container`;
 	listDisplayer.append(todoListContainer);
 
 	for(let i = 0; i < project.todoList.length; i++){
 		const todoContainer = createDiv();
-		todoContainer.id = `${project.todoList[i].name.replace(" ", "-")}`;
+		todoContainer.id = `${project.todoList[i].todoId}`;
 		todoContainer.classList.add("todo-container");
 		todoListContainer.append(todoContainer);
 
@@ -80,7 +80,7 @@ function showTodoList(project){
 
 		const todoIconContainer = createDiv();
 		todoIconContainer.className = "todo-icon-container";
-		todoIconContainer.id = `${project.todoList[i].name.replace(" ", "-")}`;
+		todoIconContainer.id = `${project.todoList[i].todoId}`;
 		todoDisplayer.append(todoIconContainer);
 
 		const expandIcon = createIcon(expand);
@@ -101,7 +101,7 @@ function showTodoList(project){
 }
 
 function displayTodoDetails(project, todo){
-	const displayer = document.querySelector(`#${todo.name.replace(" ", "-")}`);
+	const displayer = document.querySelector(`#${todo.todoId}`);
 
 	const detailDisplayer = createDiv();
 	detailDisplayer.className = "detail-displayer";
@@ -117,7 +117,7 @@ function displayTodoDetails(project, todo){
 }
 
 function removeTodo(project, todo){
-	const todoToRemove = document.querySelector(`#${todo.name.replace(" ", "-")}`);
+	const todoToRemove = document.querySelector(`#${todo.todoId}`);
 	todoToRemove.remove();
 }
 

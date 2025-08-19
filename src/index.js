@@ -1,5 +1,5 @@
 import "./styles.css";
-import {createTodo, createProject, Todo} from "./todo.js";
+import {createTodo, createProject, Todo, myprojects} from "./todo.js";
 import {displayProject, createProjectForm, createTodoForm} from "./content.js";
 
 const defaultProject = createProject("Demo");
@@ -11,13 +11,13 @@ Todo.addToProject(defaultProject, a);
 Todo.addToProject(defaultProject, c);
 Todo.addToProject(project2, b);
 
-displayProject(defaultProject);
-displayProject(project2);
+Todo.storeProject(defaultProject);
+Todo.storeProject(project2);
 
-
-console.log(defaultProject);
-console.log(project2);
-
+console.log(myprojects);
+for(let i = 0;i < myprojects.length;i++){
+	displayProject(myprojects[i]);
+}
 
 function getProjectFormData(){
 	const projectForm = document.querySelector("#project-form");
@@ -27,6 +27,7 @@ function getProjectFormData(){
 		const projectFormData = new FormData(event.target);
 		let projectName = projectFormData.get('Project-Name');
 		let project = createProject(projectName);
+		Todo.storeProject(project);
 		displayProject(project);
 
 		const formContainer = document.querySelector(".project-form-container");
@@ -46,7 +47,11 @@ function getTodoFormData(){
 		let description = todoFormData.get("Description");
 		let date = todoFormData.get("Date");
 		todo = createTodo(todoName, description, date);
-		console.log("todo " + todo)
+		console.log("todo " + todo.name);
+
+		const formContainer = document.querySelector(".todo-form-container");
+		formContainer.remove();
+		todoForm.reset();
 	})
 	return todo;
 }
@@ -83,7 +88,7 @@ project.addEventListener("click", event => {
 		let iconId = event.target.parentElement.id;
 		let data = getTodoFormData();
 		console.log(data);
-		let project = iconId.split("-").slice(1).join(" ");
+		let project = iconId;
 		console.log(project);
 		Todo.addToProject(project, data);
 		const ContentDisplayer = document.querySelector(".content-displayer");
@@ -91,5 +96,3 @@ project.addEventListener("click", event => {
 		displayProject(project);	
 	}*/
 })
-
-
