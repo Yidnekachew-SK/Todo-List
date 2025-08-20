@@ -1,33 +1,42 @@
 *{
 	box-sizing: border-box;
-	border: 1px solid red;
 }
 
 body{
-	display: grid;
-	grid-template-rows: 1fr 5fr;
+	margin: 1px;
 	min-height: 100vh;
+	background-color: rgb(159 189 198);
 }
 
 h1{
 	text-align: center;
+	margin: 10px 0;
 }
 
 .container{
+	min-height: 90vh;
 	display: grid;
 	grid-template-columns: 1.5fr 4fr;
+	border: 2px solid rgb(47 72 80);
+	background-color: rgb(223 233 236);
 }
 
 .project-bar{
 	padding: 10px;
+	border-right: 1px solid rgb(47 72 80);
+	background-color: rgb(191 211 217);
 }
 
 .add-project-button{
 	padding: 5px 15px;
+	box-shadow: 1px 1px 4px black;
 }
 
 .createdProject{
 	margin: 5px 0;
+	border: 1px solid rgb(38 58 64);
+	border-radius: 5px;
+	background-color: rgb(85 130 145);
 }
 
 .title-container{
@@ -39,6 +48,7 @@ h1{
 
 .project-title{
 	margin: 0;
+	color: rgb(240 237 237);
 }
 
 .project-icon-container{
@@ -56,15 +66,15 @@ h1{
 
 .content-displayer{
 	padding: 15px;
+	border-left: 1px solid rgb(47 72 80);
 }
 
 .todo-container{
 	padding: 10px;
 	margin-bottom: 10px;
-}
-
-.todo-display p{
-	margin: 0;
+	border: 1px solid rgb(78 158 184);
+	border-radius: 5px;
+	background-color: rgb(160 189 199);
 }
 
 .todo-display{
@@ -72,6 +82,17 @@ h1{
 	display: grid;
 	grid-template-columns: 10fr 1fr;
 	align-items: center;
+}
+
+.todo-display-expanded{
+	border-radius: 5px;
+	background-color: rgb(106 126 143);
+	border-bottom: 1px solid lightblue;
+	box-shadow: 2px 2px 5px rgb(54 67 72);
+}
+
+.todo-display p{
+	margin: 0;
 }
 
 .todo-icon-container{
@@ -91,28 +112,39 @@ h1{
 	padding: 0 10px;
 }
 
+footer{
+	margin-top: 10px;
+	border: 2px solid;
+	background-color: rgb(38 58 64);
+}
+
 footer p{
 	text-align: center;
+	color: white;
+}
+
+footer a{
+	text-decoration: none;
+	color: orange;
+}
+
+.project-form-container,
+.todo-form-container{
+	padding: 10px;
+	background-color: slategray;
+	border: 2px solid gray;
+	border-radius: 10px;
+	box-shadow: 3px 4px 5px black;
+	position: absolute;
 }
 
 .project-form-container{
 	width: 250px;
-	padding: 10px;
-	border: 2px solid gray;
-	border-radius: 10px;
-	position: absolute;
 	top: 20%;
 	left: 4%;
-	background-color: gray;
-	box-shadow: 3px 4px 5px black;
 }
 
 .todo-form-container{
-	padding: 10px;
-	background-color: gray;
-	border: 2px solid black;
-	border-radius: 5px;
-	position: absolute;
 	top: 25%;
 	left: 20%;
 }
@@ -129,7 +161,6 @@ footer p{
 
 input{
 	width: 100%;
-	border-radius: 3px;
 }
 
 .project-form-button,

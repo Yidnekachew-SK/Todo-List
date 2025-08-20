@@ -87,7 +87,8 @@ function showTodoList(project){
 		expandIcon.className = "expand-todo";
 		todoIconContainer.append(expandIcon);
 		expandIcon.addEventListener("click", () => {
-			displayTodoDetails(project, project.todoList[i])
+			displayTodoDetails(project, project.todoList[i]);
+			todoDisplayer.classList.add("todo-display-expanded");
 		}, { once: true });
 
 		const deleteIcon = createIcon(remove);

@@ -46,7 +46,7 @@ function getTodoFormData(callback){
 		let description = todoFormData.get("Description");
 		let date = todoFormData.get("Date");
 		let formattedDate = format(date, "MMM do, yyyy");
-		let todo = createTodo(todoName, description, formatedDate);
+		let todo = createTodo(todoName, description, formattedDate);
 		callback(todo);
 
 		const formContainer = document.querySelector(".todo-form-container");
