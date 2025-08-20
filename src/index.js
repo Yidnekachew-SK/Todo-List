@@ -15,7 +15,6 @@ Todo.addToProject(project2, b);
 Todo.storeProject(defaultProject);
 Todo.storeProject(project2);
 
-console.log(myprojects);
 for(let i = 0;i < myprojects.length;i++){
 	displayProject(myprojects[i]);
 }
@@ -54,9 +53,16 @@ function getTodoFormData(callback){
 		formContainer.remove();
 		todoForm.reset();
 	})
+	todoForm.addEventListener("click", event => {
+		if(event.target.classList.contains("cancel-form")){
+			const formContainer  = document.querySelector(".todo-form-container");
+			formContainer.remove();
+			todoForm.reset();
+		}
+	})
 }
 
-function cancelForm(){
+function cancelProjectForm(){
 	const cancelButton = document.querySelector(".cancel-form-button");
 	cancelButton.addEventListener("click", () => {
 		const form = document.querySelector(".project-form-container");
@@ -68,7 +74,7 @@ const addProject = document.querySelector(".add-project-button");
 addProject.addEventListener("click", () => {
 	createProjectForm();
 	getProjectFormData();
-	cancelForm()
+	cancelProjectForm()
 })
 
 const project = document.querySelector(".project-bar");
@@ -89,7 +95,6 @@ project.addEventListener("click", event => {
 		getTodoFormData(todo => {
 			let project = myprojects.find(project => project.id === iconId);
 			Todo.addToProject(project, todo);
-			console.log(project);
 			const ContentDisplayer = document.querySelector(".content-displayer");
 			ContentDisplayer.innerHTML = "";
 			showTodoList(project);
