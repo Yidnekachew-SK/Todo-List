@@ -167,4 +167,4 @@ function createTodoForm(){
 	document.body.append(todoFormContainer);
 }
 
-export {displayProject, createProjectForm, createTodoForm}
+export {displayProject, showTodoList, createProjectForm, createTodoForm}
