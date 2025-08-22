@@ -4,20 +4,10 @@ import {createTodo, createProject, Todo, myprojects} from "./todo.js";
 import {displayProject, showTodoList, createProjectForm, createTodoForm} from "./content.js";
 
 const defaultProject = createProject("Demo");
-const project2 = createProject("Demo 2");
-const a = createTodo("project", "demo description",format(new Date, "MMM do, yyyy"));
-const b = createTodo("project 2", "demo description 2", format(new Date, "MMM do, yyyy"));
-const c = createTodo("project 3", "demo description 3", format(new Date, "MMM do, yyyy"));
+const a = createTodo("demo task", "demo description",format(new Date, "MMM do, yyyy"));
 Todo.addToProject(defaultProject, a);
-Todo.addToProject(defaultProject, c);
-Todo.addToProject(project2, b);
-
 Todo.storeProject(defaultProject);
-Todo.storeProject(project2);
-
-for(let i = 0;i < myprojects.length;i++){
-	displayProject(myprojects[i]);
-}
+displayProject(defaultProject);
 
 function getProjectFormData(){
 	const projectForm = document.querySelector("#project-form");
@@ -101,4 +91,3 @@ project.addEventListener("click", event => {
 		});
 	}
 })
-

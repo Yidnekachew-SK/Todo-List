@@ -87,9 +87,10 @@ function showTodoList(project){
 		expandIcon.className = "expand-todo";
 		todoIconContainer.append(expandIcon);
 		expandIcon.addEventListener("click", () => {
-			displayTodoDetails(project, project.todoList[i]);
-			todoDisplayer.classList.add("todo-display-expanded");
-		}, { once: true });
+			todoDisplayer.classList.toggle("todo-display-expanded");
+			const detail = event.target.parentElement.parentElement.nextSibling;
+			detail.classList.toggle("detail-visible")
+		});
 
 		const deleteIcon = createIcon(remove);
 		deleteIcon.className = "delete-todo";
@@ -98,6 +99,7 @@ function showTodoList(project){
 			removeTodo(project, project.todoList[i]);
 			project.todoList.splice(i,1);
 		})
+		displayTodoDetails(project, project.todoList[i]);
 	}
 }
 

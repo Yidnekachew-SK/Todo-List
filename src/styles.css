@@ -110,6 +110,11 @@ h1{
 
 .detail-displayer{
 	padding: 0 10px;
+	display: none;
+}
+
+.detail-visible{
+	display: block;
 }
 
 footer{
