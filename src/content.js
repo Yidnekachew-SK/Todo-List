@@ -63,6 +63,11 @@ function showTodoList(project){
 	todoListContainer.id = `${project.id}-container`;
 	listDisplayer.append(todoListContainer);
 
+	const todoListHeader = document.createElement("h2");
+	todoListHeader.className = "content-header";
+	todoListHeader.textContent = `${project.name}`;
+	todoListContainer.append(todoListHeader);
+
 	for(let i = 0; i < project.todoList.length; i++){
 		const todoContainer = createDiv();
 		todoContainer.id = `${project.todoList[i].todoId}`;
