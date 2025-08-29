@@ -1,5 +1,6 @@
 *{
 	box-sizing: border-box;
+	border: 1px solid red;
 }
 
 body{
@@ -27,7 +28,13 @@ h1{
 	background-color: rgb(191 211 217);
 }
 
+.projects-container > h3{
+	text-align: center;
+	color: blue;
+}
+
 .add-project-button{
+	margin: 0 5px;
 	padding: 5px 15px;
 	box-shadow: 1px 1px 4px black;
 }
@@ -71,6 +78,7 @@ h1{
 
 .content-header{
 	text-align: center;
+	margin-top: 0;
 }
 
 .todo-container{

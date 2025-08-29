@@ -1,29 +1,36 @@
 import add from "./icons/add.svg";
 import remove from "./icons/delete.svg";
 import expand from "./icons/expand.svg";
+import shrink from "./icons/shrink.svg";
 import {myprojects} from "./todo.js"
 
-function createDiv(){
+function createDiv () {
 	return document.createElement("div");
 }
 
-function createParagraph(){
+function createParagraph () {
 	return document.createElement("p");
 }
 
-function createButton(){
+function createButton () {
 	return document.createElement("button");
 }
 
-function createIcon(icon){
+function createIcon (icon, className) {
 	const img = document.createElement("img");
 	img.src = `${icon}`;
+	img.className = className;
 
 	return img;
 }
 
-function displayProject(project){
-	const projectContainer = document.querySelector(".project-bar");
+function createContentHeader (headerName) {
+	const todoListHeader = document.querySelector(".content-header");
+	todoListHeader.textContent = headerName;
+}
+
+function displayProject (project) {
+	const projectContainer = document.querySelector(".projects-container");
 	const div = createDiv();
 	div.className = "createdProject";
 	div.classList.add(`${project.id}`);
@@ -38,7 +45,8 @@ function displayProject(project){
 	title.textContent = `${project.name}`;
 	titleContainer.append(title);
 	title.addEventListener("click", () => {
-		showTodoList(project);
+		showTodoList(project, "project");
+		createContentHeader(`${project.name}`);
 	})
 
 	const projectIconContainer = createDiv();
@@ -46,27 +54,22 @@ function displayProject(project){
 	projectIconContainer.id = `${project.id}`;
 	titleContainer.append(projectIconContainer);
 
-	const addIcon = createIcon(add);
-	addIcon.classList.add("add-todo-icon");
+	const addIcon = createIcon(add, "add-todo-icon");
 	projectIconContainer.append(addIcon);
 
-	const deleteIcon = createIcon(remove);
-	deleteIcon.classList.add("delete-project-icon");
+	const deleteIcon = createIcon(remove, "delete-project-icon");
 	projectIconContainer.append(deleteIcon);
 }
 
-function showTodoList(project){
+function showTodoList (project, purpose) {
 	const listDisplayer = document.querySelector(".content-displayer");
-	listDisplayer.innerHTML = "";
-	const todoListContainer = createDiv();
-	todoListContainer.className = "todo-list-container";
-	todoListContainer.id = `${project.id}-container`;
-	listDisplayer.append(todoListContainer);
 
-	const todoListHeader = document.createElement("h2");
-	todoListHeader.className = "content-header";
-	todoListHeader.textContent = `${project.name}`;
-	todoListContainer.append(todoListHeader);
+	const todoListContainer = document.querySelector(".todo-list-container");
+	todoListContainer.id = `${project.id}-container`;
+	if(purpose === "project"){
+		todoListContainer.innerHTML = "";
+	}
+	listDisplayer.append(todoListContainer);
 
 	for(let i = 0; i < project.todoList.length; i++){
 		const todoContainer = createDiv();
@@ -88,8 +91,7 @@ function showTodoList(project){
 		todoIconContainer.id = `${project.todoList[i].todoId}`;
 		todoDisplayer.append(todoIconContainer);
 
-		const expandIcon = createIcon(expand);
-		expandIcon.className = "expand-todo";
+		const expandIcon = createIcon(expand, "expand-todo");
 		todoIconContainer.append(expandIcon);
 		expandIcon.addEventListener("click", () => {
 			todoDisplayer.classList.toggle("todo-display-expanded");
@@ -97,8 +99,7 @@ function showTodoList(project){
 			detail.classList.toggle("detail-visible")
 		});
 
-		const deleteIcon = createIcon(remove);
-		deleteIcon.className = "delete-todo";
+		const deleteIcon = createIcon(remove, "delete-todo");
 		todoIconContainer.append(deleteIcon);
 		deleteIcon.addEventListener("click", () => {
 			removeTodo(project, project.todoList[i]);
@@ -108,7 +109,7 @@ function showTodoList(project){
 	}
 }
 
-function displayTodoDetails(project, todo){
+function displayTodoDetails (project, todo) {
 	const displayer = document.querySelector(`#${todo.todoId}`);
 
 	const detailDisplayer = createDiv();
@@ -124,12 +125,12 @@ function displayTodoDetails(project, todo){
 	detailDisplayer.append(date);
 }
 
-function removeTodo(project, todo){
+function removeTodo (project, todo) {
 	const todoToRemove = document.querySelector(`#${todo.todoId}`);
 	todoToRemove.remove();
 }
 
-function createProjectForm(){
+function createProjectForm () {
 	const projectFormContainer = createDiv();
 	projectFormContainer.className = "project-form-container";
 	projectFormContainer.innerHTML = `
@@ -148,7 +149,7 @@ function createProjectForm(){
 	document.body.append(projectFormContainer);
 }
 
-function createTodoForm(){
+function createTodoForm () {
 	const todoFormContainer = createDiv();
 	todoFormContainer.className = "todo-form-container";
 	todoFormContainer.innerHTML = `
@@ -175,4 +176,4 @@ function createTodoForm(){
 	document.body.append(todoFormContainer);
 }
 
-export {displayProject, showTodoList, createProjectForm, createTodoForm}
+export {createContentHeader, displayProject, showTodoList, createProjectForm, createTodoForm}
