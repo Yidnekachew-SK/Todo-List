@@ -1,7 +1,7 @@
 import "./styles.css";
-import { format, parseISO } from 'date-fns';
-import {createTodo, createProject, Todo, myprojects} from "./todo.js";
-import {createContentHeader, displayProject, showTodoList, createProjectForm, createTodoForm} from "./content.js";
+import { format, parse, isSameWeek } from 'date-fns';
+import { createTodo, createProject, Todo, myprojects } from "./todo.js";
+import { createContentHeader, displayProject, showTodoList, createProjectForm, createTodoForm } from "./content.js";
 
 const defaultProject = createProject("Demo");
 const a = createTodo("demo task", "demo description",format(new Date, "MMM do, yyyy"));
@@ -66,6 +66,13 @@ function cancelProjectForm(){
 	})
 }
 
+function checkDate (date) {
+	let correctedDate = parse(date, 'MMM do, yyyy', new Date());
+	let result = isSameWeek(new Date(), correctedDate, {weekStartsOn: 1});
+	console.log("date: " + correctedDate + " " + result);
+	return result;
+}
+
 const addProject = document.querySelector(".add-project-button");
 addProject.addEventListener("click", () => {
 	createProjectForm();
@@ -110,12 +117,21 @@ allTodoDisplayer.addEventListener("click", () => {
 const todayTodoDisplayer = document.querySelector(".today-todos");
 todayTodoDisplayer.addEventListener("click", () => {
 	document.querySelector(".todo-list-container").innerHTML = "";
-	const matchingProjects = myprojects.filter(project =>
+	const matchingTodo = myprojects.filter(project =>
   		project.todoList?.some(todo => todo.date === format(new Date, "MMM do, yyyy")));
-	for(let i = 0; i < matchingProjects.length; i++){
+	for(let i = 0; i < matchingTodo.length; i++){
 		createContentHeader("Today");
-		showTodoList(matchingProjects[i], "show today todo");
+		showTodoList(matchingTodo[i], "show today todo");
 	}
 })
 
-//this week and completed todos are not finished
+const weeklyTodoDisplayer = document.querySelector(".weekly-todos");
+weeklyTodoDisplayer.addEventListener("click", () => {
+	document.querySelector(".todo-list-container").innerHTML = "";
+	const matchingTodo = myprojects.filter(project =>
+  		project.todoList?.some(todo => checkDate(todo.date)));
+	for(let i = 0; i < matchingTodo.length; i++){
+		createContentHeader("This Week");
+		showTodoList(matchingTodo[i], "show weekly todo");
+	}
+})
