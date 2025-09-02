@@ -1,6 +1,5 @@
 *{
 	box-sizing: border-box;
-	border: 1px solid red;
 }
 
 body{
@@ -28,9 +27,14 @@ h1{
 	background-color: rgb(191 211 217);
 }
 
+.todo-displaying-container h3{
+	color:  rgb(53, 88, 98);
+}
+
 .projects-container > h3{
 	text-align: center;
-	color: blue;
+	color: rgb(55, 71, 79);
+	border-bottom: 1px solid black;
 }
 
 .add-project-button{
@@ -92,7 +96,7 @@ h1{
 .todo-display{
 	padding: 5px;
 	display: grid;
-	grid-template-columns: 10fr 1fr;
+	grid-template-columns: 0.5fr 10fr 1fr;
 	align-items: center;
 }
 
@@ -101,6 +105,12 @@ h1{
 	background-color: rgb(106 126 143);
 	border-bottom: 1px solid lightblue;
 	box-shadow: 2px 2px 5px rgb(54 67 72);
+}
+
+.checkboxs{
+	margin: 0;
+	width: 20px;
+	height: 20px;
 }
 
 .todo-display p{

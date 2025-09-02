@@ -9,12 +9,6 @@ Todo.addToProject(defaultProject, a);
 Todo.storeProject(defaultProject);
 displayProject(defaultProject);
 
-const project2 = createProject("demo2");
-const b = createTodo("test", "test desc", format("2025/10/3", "MMM do, yyyy"));
-Todo.addToProject(project2, b);
-Todo.storeProject(project2);
-displayProject(project2);
-
 function getProjectFormData(){
 	const projectForm = document.querySelector("#project-form");
 	projectForm.addEventListener("submit", event => {
@@ -68,9 +62,7 @@ function cancelProjectForm(){
 
 function checkDate (date) {
 	let correctedDate = parse(date, 'MMM do, yyyy', new Date());
-	let result = isSameWeek(new Date(), correctedDate, {weekStartsOn: 1});
-	console.log("date: " + correctedDate + " " + result);
-	return result;
+	return isSameWeek(new Date(), correctedDate, {weekStartsOn: 1});
 }
 
 const addProject = document.querySelector(".add-project-button");
@@ -108,8 +100,8 @@ project.addEventListener("click", event => {
 const allTodoDisplayer = document.querySelector(".all-todos");
 allTodoDisplayer.addEventListener("click", () => {
 	document.querySelector(".todo-list-container").innerHTML = "";
+	createContentHeader("All");
 	for(let i = 0; i < myprojects.length; i++){
-		createContentHeader("All");
 		showTodoList(myprojects[i], "show all");
 	}
 })
@@ -119,8 +111,8 @@ todayTodoDisplayer.addEventListener("click", () => {
 	document.querySelector(".todo-list-container").innerHTML = "";
 	const matchingTodo = myprojects.filter(project =>
   		project.todoList?.some(todo => todo.date === format(new Date, "MMM do, yyyy")));
+	createContentHeader("Today");
 	for(let i = 0; i < matchingTodo.length; i++){
-		createContentHeader("Today");
 		showTodoList(matchingTodo[i], "show today todo");
 	}
 })
@@ -130,8 +122,19 @@ weeklyTodoDisplayer.addEventListener("click", () => {
 	document.querySelector(".todo-list-container").innerHTML = "";
 	const matchingTodo = myprojects.filter(project =>
   		project.todoList?.some(todo => checkDate(todo.date)));
+	createContentHeader("This Week");
 	for(let i = 0; i < matchingTodo.length; i++){
-		createContentHeader("This Week");
 		showTodoList(matchingTodo[i], "show weekly todo");
+	}
+})
+
+const completedTodoDisplayer = document.querySelector(".completed-todos");
+completedTodoDisplayer.addEventListener("click", () => {
+	document.querySelector(".todo-list-container").innerHTML = "";
+	const matchingTodo = myprojects.filter(project =>
+  		project.todoList?.some(todo => todo.isComplete));
+	createContentHeader("Completed");
+  for(let i = 0; i < matchingTodo.length; i++){
+		showTodoList(matchingTodo[i], "show completed todo");
 	}
 })

@@ -29,6 +29,17 @@ function createContentHeader (headerName) {
 	todoListHeader.textContent = headerName;
 }
 
+function createCheckList (todoUsed) {
+	const input = document.createElement("input");
+	input.type = "checkbox";
+	input.className = "checkboxs";
+	input.id = todoUsed.todoId;
+	input.addEventListener("change", () => {
+		todoUsed.isComplete = input.checked;
+	})
+	return input;
+}
+
 function displayProject (project) {
 	const projectContainer = document.querySelector(".projects-container");
 	const div = createDiv();
@@ -79,6 +90,7 @@ function showTodoList (project, purpose) {
 
 		const todoDisplayer = createDiv();
 		todoDisplayer.className = "todo-display";
+		todoDisplayer.append(createCheckList(project.todoList[i]));
 		todoContainer.append(todoDisplayer);
 
 		const nameOfTodo = createParagraph();
